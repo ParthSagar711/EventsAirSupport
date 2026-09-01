@@ -1,0 +1,13 @@
+/* Onlineuser - Find any records with the email */
+
+-- any records linked to online user tleslie1@ualberta.ca  OR Tara.Leslie.Temporary
+Select c.Id AS contactID,
+c.ContactIdentifier,
+ou.id AS OnlineUserID,
+ou.AccountEmail,
+c.MasterContactId,
+e.Id AS EventID,
+e.Name AS EventName,
+e.ContactStoreId AS ContactStoreID  
+from Contacts c join OnlineUsers ou on c.OnlineUserId=ou.Id join Events e on c.EventId = e.Id
+where  ou.AccountEmail  like '%Tara.Leslie.Temporary%' OR ou.AccountEmail  like '%tleslie1@ualberta.ca%'  
