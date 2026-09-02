@@ -1,4 +1,6 @@
+/* -------------------------------*/
 /* Onlineuser - Find any records with the email */
+/* -------------------------------*/
 
 -- any records linked to online user tleslie1@ualberta.ca  OR Tara.Leslie.Temporary
 Select c.Id AS contactID,
