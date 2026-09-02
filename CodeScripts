@@ -11,3 +11,37 @@ e.Name AS EventName,
 e.ContactStoreId AS ContactStoreID  
 from Contacts c join OnlineUsers ou on c.OnlineUserId=ou.Id join Events e on c.EventId = e.Id
 where  ou.AccountEmail  like '%Tara.Leslie.Temporary%' OR ou.AccountEmail  like '%tleslie1@ualberta.ca%'  
+
+
+
+
+/* -------------------------------*/
+/* Meeting Hub Connection Request */
+/* -------------------------------*/
+
+select 
+-- From Contact
+mhc.Id AS MeetingID,
+mhc.FromContactId ,
+fc.ContactIdentifier AS FromConTactID,
+fc.FirstName ,
+fc.LastName ,
+mhc.ConnectionStatus ,
+
+
+--to Contact
+mhc.Id AS MeetingID,
+mhc.ToContactId,
+tc.ContactIdentifier AS ToConTactID,
+tc.FirstName,
+tc.LastName,
+mhc.ConnectionStatus
+
+from MeetingHubConnections mhc 
+LEFT JOIN Contacts fc on mhc.FromContactId = fc.Id
+LEFT JOIN Contacts tc on mhc.ToContactId = tc.Id
+
+where mhc.EventId ='850cd8f6-6dbd-432d-8adc-bebadcfcbbb2' 
+and mhc.ConnectionStatus='2' -- Status 2: is connected. 1 is no request
+and mhc.FromContactId <> mhc.ToContactId -- Not to match same records.
+and mhc.IsDeleted = '0' -- only successful, not withdrawn.
