@@ -27,3 +27,41 @@ linkRegex,
  
 setInterval(convertTextLinks, 500);
 </script>
+
+
+
+/* Event Website - Speaker - Update biography text label and increase the default width. */
+
+/* CSS for Biography whitespace to be removed */
+<style>
+#speaker-biography {
+white-space: pre-line !important;
+max-height: none !important;
+height: auto !important;
+overflow: visible !important;
+}
+</style>
+
+<script>
+    setInterval(function () {
+        document.querySelectorAll('body *').forEach(function (element) {
+            if (
+                element.children.length === 0 &&
+                element.textContent.includes('Biography')
+            ) {
+                element.textContent = element.textContent.replace(
+                    /Biography/g,
+                    'Details'
+                );
+            }
+        });
+    }, 300);
+
+    setInterval(function () {
+        var el = document.getElementById('speaker-biography');
+
+        if (el) {
+            el.classList.remove('read-more-text__content--collapsed');
+        }
+    }, 300);
+</script>
