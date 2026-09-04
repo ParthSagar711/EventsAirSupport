@@ -1,0 +1,29 @@
+/* Event Website - Agenda - Make links clickable on the Website agenda. */
+ 
+ 
+<script>
+const overviewLinkTags = /&lt;\/?a&gt;/gi;
+ 
+function cleanOverview() {
+document.querySelectorAll('.agenda-widget__item-overview').forEach(function (el) {
+el.innerHTML = el.innerHTML.replace(overviewLinkTags, '');
+});
+}
+ 
+setInterval(cleanOverview, 500);
+ 
+const linkRegex = /&lt;a&gt;(https?:\/\/.*?)&lt;\/a&gt;/gi;
+ 
+function convertTextLinks() {
+document.querySelectorAll('.section-body.is-bold').forEach(function (el) {
+if (linkRegex.test(el.innerHTML)) {
+el.innerHTML = el.innerHTML.replace(
+linkRegex,
+'<a href="$1" target="_blank" rel="noopener noreferrer">$1</a>'
+);
+}
+});
+}
+ 
+setInterval(convertTextLinks, 500);
+</script>
